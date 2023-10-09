@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+   /* *::-webkit-scrollbar {
+      display: none;
+   }
+   * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+   } */
+
+   html::-webkit-scrollbar {
+      display: none;
+   }
+   html {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+   }
+
+   .hideScrollbar::-webkit-scrollbar {
+      display: none;
+   }
+   .hideScrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+   }
+   /* 
+   .appear-right {
+      animation: appearRight 1s ease-out;
+   }
+   @keyframes appearRight {
+      0% {
+         transform: translateX(-100%);
+         opacity: 0;
+      }
+      100% {
+         transform: translateX(0);
+         opacity: 1;
+      }
+   } */
+}
+
+@layer utilities {
+   /* .custom-underline {
+      text-decoration: underline;
+      text-underline-offset: 4px; /* Adjust this value to control the spacing 
+      animation: fadeIn 0.5s ease-out;
+   } */
+   .custom-underline:hover::after {
+      position: absolute;
+      z-index: 50;
+      height: 1px;
+      width: 100%;
+      content: "";
+      left: 0;
+      bottom: -2px;
+      animation: fadeIn 0.3s ease-out;
+      background-color: white;
+   }
+
+   @keyframes fadeIn {
+      0% {
+         opacity: 0;
+      }
+      100% {
+         opacity: 1;
+      }
+   }
+}
