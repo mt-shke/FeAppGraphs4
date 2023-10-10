@@ -2,12 +2,6 @@ import React from "react";
 import { ICtxProps } from "../GraphsPage1Section";
 import {
    getSingleCodeTransactions,
-   getTransactions,
-   getTransactionsAmount,
-   getTransactionsBySym,
-   getTransactionsCode,
-   getTransactionsDate,
-   getTransactionsPrice,
    getTransactionsTotal,
    getTransactionsTotalAmount,
 } from "../../../../utils/transaction";
@@ -44,14 +38,14 @@ const DataCard: React.FC<props> = ({ ctx, transactionCode }) => {
    const content = !highest ? (
       `${customerName} has no ${transactionCode} transaction.`
    ) : (
-      <>
+      <article>
          <p>
             {`${customerName} has ${numberOfTransactionsString} for a total of $${totalAmount}.`}
          </p>
          <p>
             {`${customerName}'s highest ${transactionCode} transaction amount is $${highest.amount} for the ${highest.symbol} company.`}
          </p>
-      </>
+      </article>
    );
 
    return <article className="p-2">{content}</article>;

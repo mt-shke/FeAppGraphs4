@@ -2,11 +2,13 @@ import Container from "../../components/ui/container/Container";
 
 const IndexPageSection: React.FC = () => {
    return (
-      <div className="min-h-screen w-full flex flex-1 py-1 md:min-h-0 md:row-start-2 md:row-end-4 lg:row-span-1 lg:col-start-3 lg:col-end-6">
+      <div className="w-full flex flex-1 py-1 md:min-h-0 md:row-start-2 md:row-end-4 lg:row-span-1 lg:col-start-3 lg:col-end-6">
          <section className="flex flex-1 p-2 md:col-start-3 md:col-end-6 bg-main-grey4 rounded">
             <Container customStyle="flex flex-1 bg-main-grey3 overflow-y-scroll">
-               <article className="flex flex-col gap-3 p-2">
-                  <h2 className="pt-4 pb-2 font-bold">Solve problems</h2>
+               <article className="flex flex-col gap-3 px-2 py-4">
+                  <h2 className="pt-4 pb-2 text-xl font-bold">
+                     Solve problems
+                  </h2>
                   <p>
                      In today's data-driven world, data analytics is a
                      game-changer for organizations seeking to understand and

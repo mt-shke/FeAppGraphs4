@@ -35,12 +35,15 @@ const AsideFooter: React.FC<ICustomerProps> = ({ ctx }) => {
          ) : (
             ""
          )}
-         <span
-            onClick={() => setRandomCustomer()}
-            className="px-2 py-1 shadow-lg bg-green-900 rounded"
-         >
-            Set A Random Customer
-         </span>
+         <div className="flex flex-col gap-4 items-center">
+            <span
+               onClick={() => setRandomCustomer()}
+               className="px-2 py-1 shadow-lg bg-green-900 rounded hover:cursor-pointer"
+            >
+               Set A Random Customer
+            </span>
+            <span>And pick an account</span>
+         </div>
       </div>
    );
 };
