@@ -1,6 +1,7 @@
 ```js
 // Add data content
 // Auth
+// Change graph names
 
 // - Desktop software - Rust
 

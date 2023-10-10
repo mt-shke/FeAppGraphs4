@@ -6,7 +6,7 @@ import {
    getTransactionsTotalAmount,
 } from "../../../../utils/transaction";
 
-interface props extends ICtxProps {
+export interface IDataCardProps extends ICtxProps {
    transactionCode: "buy" | "sell";
 }
 
@@ -28,6 +28,7 @@ const DataCard: React.FC<props> = ({ ctx, transactionCode }) => {
    const numberOfTransactionsString = `${totalTransactions} ${transactionCode} transaction${
       totalTransactions >= 2 ? "s" : ""
    }`;
+
    const highest =
       sortedTransactions.length >= 1
          ? [...sortedTransactions.sort((a, b) => a.amount - b.amount)][

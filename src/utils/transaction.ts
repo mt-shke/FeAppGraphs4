@@ -21,9 +21,10 @@ export const sortTransactions = (
    if (transactionsArray.length <= 0) {
       return [];
    }
-   return transactionsArray.sort(
+   const sorted = transactionsArray.sort(
       (a, b) => dateToUnix(a.date) - dateToUnix(b.date)
    );
+   return sorted;
 };
 
 // Filter account/transactions bucket data and return sorted transactions
@@ -58,30 +59,35 @@ export const getSingleCodeTransactions = (
 ): TransactionType[] => {
    if (ctx.account && ctx.transactions) {
       const firstBucketTransactions = getAccountBucketTransactions(ctx);
-      return sortTransactions(firstBucketTransactions, transactionCode).filter(
+      const result = sortTransactions(firstBucketTransactions);
+      const filtered = result.filter(
          (trans) => trans.transaction_code === transactionCode
       );
+      if (filtered.length < 1) {
+         return [];
+      }
+      return filtered;
    }
 };
 
 // // // // // // // // // // // // // //
 // ALL TRANSACTION DATA FUNCTIONS //
-export const getTransactionsCode = (transaction: TransactionType[]) =>
-   transaction.map((trans) => trans.transaction_code)[0]?.toString() ?? "";
-export const getTransactionsPrice = (transaction: TransactionType[]) =>
-   transaction.map((trans) => fixStringNumber(trans.price));
-export const getTransactionsDate = (transaction: TransactionType[]) =>
-   transaction.map((trans) => dateToEnFormat(trans.date));
-export const getTransactionsTotal = (transaction: TransactionType[]) =>
-   transaction.map((trans) => fixStringNumber(trans.total));
-export const getTransactionsAmount = (transaction: TransactionType[]) =>
-   transaction.map((trans) => trans.amount);
+export const getTransactionsCode = (transactions: TransactionType[]) =>
+   transactions.map((trans) => trans.transaction_code)[0]?.toString() ?? "";
+export const getTransactionsPrice = (transactions: TransactionType[]) =>
+   transactions.map((trans) => fixStringNumber(trans.price));
+export const getTransactionsDate = (transactions: TransactionType[]) =>
+   transactions.map((trans) => dateToEnFormat(trans.date));
+export const getTransactionsTotal = (transactions: TransactionType[]) =>
+   transactions.map((trans) => fixStringNumber(trans.total));
+export const getTransactionsAmount = (transactions: TransactionType[]) =>
+   transactions.map((trans) => trans.amount);
 export const getTransactionsTotalAmount = (array: TransactionType[]) =>
    array.reduce((prev, curr) => prev + curr.amount, 0);
 export const getTransactionsBySym = (
-   transaction: TransactionType[],
+   transactions: TransactionType[],
    sym: string
-) => transaction.filter((trans) => trans.symbol === sym);
+) => transactions.filter((trans) => trans.symbol === sym);
 
 function generateDataObject(
    allYears: string[],
