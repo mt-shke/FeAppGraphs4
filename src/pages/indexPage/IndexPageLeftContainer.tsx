@@ -10,11 +10,11 @@ const IndexPageLeftContainer: React.FC = () => {
                      <strong>Graphs</strong>
                   </h1>
                   <p>
-                     We aim to redefine problem-solving by harnessing the
+                     {`We aim to redefine problem-solving by harnessing the
                      immense power of data analytics. We believe that data is
                      the compass that guides organizations through turbulent
                      waters, helping them make precise decisions, identify
-                     opportunities, and overcome major challenges.
+                     opportunities, and overcome major challenges.`}
                   </p>
                </article>
             </Container>

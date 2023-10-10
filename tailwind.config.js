@@ -2,6 +2,9 @@
 export default {
    content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
    theme: {
+      fontFamily: {
+         ptserif: ["PT Serif, sans-serif"],
+      },
       animation: {
          spinning: " spinning 1s linear infinite",
          wiggle: "wiggle 1s ease-in-out infinite",
