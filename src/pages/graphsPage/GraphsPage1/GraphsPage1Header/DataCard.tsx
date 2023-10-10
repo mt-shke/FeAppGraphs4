@@ -30,25 +30,30 @@ const DataCard: React.FC<props> = ({ ctx, transactionCode }) => {
    // const amount = getTransactionsAmount(sortedTransactions);
    const total = getTransactionsTotal(sortedTransactions);
    const totalAmount = getTransactionsTotalAmount(sortedTransactions);
-
    const totalTransactions = total.length;
-
    const numberOfTransactionsString = `${totalTransactions} ${transactionCode} transaction${
       totalTransactions >= 2 ? "s" : ""
    }`;
-   const highest = [...sortedTransactions.sort((a, b) => a.amount - b.amount)][
-      sortedTransactions.length - 1
-   ];
+   const highest =
+      sortedTransactions.length >= 1
+         ? [...sortedTransactions.sort((a, b) => a.amount - b.amount)][
+              sortedTransactions.length - 1
+           ]
+         : null;
 
-   return (
-      <article className="p-2">
+   const content = !highest ? (
+      `${customerName} has no ${transactionCode} transaction.`
+   ) : (
+      <>
          <p>
             {`${customerName} has ${numberOfTransactionsString} for a total of $${totalAmount}.`}
          </p>
          <p>
-            {`${customerName}'s highest ${transactionCode} transaction amount is ${highest.amount} for the ${highest.symbol} company.`}
+            {`${customerName}'s highest ${transactionCode} transaction amount is $${highest.amount} for the ${highest.symbol} company.`}
          </p>
-      </article>
+      </>
    );
+
+   return <article className="p-2">{content}</article>;
 };
 export default DataCard;
