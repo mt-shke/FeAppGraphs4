@@ -8,44 +8,64 @@ import {
 } from "../../../utils/transaction";
 import ChartModel from "../../../components/echarts/ChartModel";
 import { ICustomChartData, chartColors } from "../../../utils/echarts";
+import { AllTransactionsType } from "../../../models/ts/types";
+import React from "react";
 
 export interface ICtxProps {
    ctx: ICustomerState;
 }
 
 const GraphsPage1Section: React.FC<ICtxProps> = ({ ctx }) => {
-   const sortedTransactions = getTransactions(ctx);
-
-   if (!ctx.account || !sortedTransactions) {
-      return (
-         <div className="flex flex-1 md:row-start-2 md:row-end-4 md:py-1">
-            <section className="flex flex-1 flex-col md:py-0 md:px-2 md:bg-main-grey4 rounded">
-               <div className="min-h-screen flex py-1 md:min-h-0 md:flex-1 md:p-0 rounded">
-                  <div className="flex flex-1 flex-col gap-2 p-2 md:p-0 md:py-2 md:min-h-max md:h-full md:flex-row bg-main-grey4 rounded">
-                     <Container customStyle="flex flex-1 md:flex-auto md:w-1/3 bg-main-grey"></Container>
-                     <hr className="hidden md:block w-[1px] h-full bg-main-grey" />
-                     <Container customStyle="flex flex-1 md:flex-auto md:w-2/3 bg-main-grey2"></Container>
-                  </div>
-               </div>
-               <hr className="hidden md:block h-[1px] w-full border border-b-[1px] border-b-main-grey" />
-               <div className="min-h-screen flex flex-1 py-1 md:min-h-0 md:flex-1 md:p-0 rounded">
-                  <div className="flex flex-1 flex-col gap-2 p-2 md:p-0 md:py-2 md:min-h-max md:h-full md:flex-row bg-main-grey4 rounded">
-                     <Container customStyle="flex flex-1 bg-main-grey2"></Container>
-                     <hr className="hidden md:block w-[1px] h-full bg-main-grey" />
-                     <Container customStyle="flex flex-1 bg-main-grey3"></Container>
-                  </div>
-               </div>
-            </section>
-         </div>
-      );
+   let chartTotal,
+      chartAll,
+      chartBuy,
+      chartSell = <></>;
+   if (ctx.account && ctx.customer) {
+      const sortedTransactions = getTransactions(ctx);
+      const expectedSectionData = getSectionData(sortedTransactions);
+      chartTotal = <ChartModel chartData={expectedSectionData.totalData} />;
+      chartAll = <ChartModel chartData={expectedSectionData.allData} />;
+      chartBuy = <ChartModel chartData={expectedSectionData.buyData} />;
+      chartSell = <ChartModel chartData={expectedSectionData.sellData} />;
    }
+   return (
+      <div className="flex flex-1 md:row-start-2 md:row-end-4 md:py-1">
+         <section className="flex flex-1 flex-col md:py-0 md:px-2 md:bg-main-grey4 rounded">
+            <div className="min-h-screen flex py-1 md:min-h-0 md:flex-1 md:p-0 rounded">
+               <div className="flex flex-1 flex-col gap-2 p-2 md:p-0 md:py-2 md:min-h-max md:h-full md:flex-row bg-main-grey4 rounded">
+                  <Container customStyle="flex flex-1 md:flex-auto md:w-1/3 bg-main-grey">
+                     {chartTotal}
+                  </Container>
+                  <hr className="hidden md:block w-[1px] h-full bg-main-grey" />
+                  <Container customStyle="flex flex-1 md:flex-auto md:w-2/3 bg-main-grey2">
+                     {chartAll}
+                  </Container>
+               </div>
+            </div>
+            <hr className="hidden md:block h-[1px] w-full border border-b-[1px] border-b-main-grey" />
+            <div className="min-h-screen flex flex-1 py-1 md:min-h-0 md:flex-1 md:p-0 rounded">
+               <div className="flex flex-1 flex-col gap-2 p-2 md:p-0 md:py-2 md:min-h-max md:h-full md:flex-row bg-main-grey4 rounded">
+                  <Container customStyle="flex flex-1 bg-main-grey2">
+                     {chartBuy}
+                  </Container>
+                  <hr className="hidden md:block w-[1px] h-full bg-main-grey" />
+                  <Container customStyle="flex flex-1 bg-main-grey3">
+                     {chartSell}
+                  </Container>
+               </div>
+            </div>
+         </section>
+      </div>
+   );
+};
+export default GraphsPage1Section;
 
-   let buyData: ICustomChartData | null = null;
-   let sellData: ICustomChartData | null = null;
-   let allData: ICustomChartData | null = null;
-   let totalData: any;
-
+const getSectionData = (sortedTransactions: AllTransactionsType) => {
    const { buy, sell, byDates } = sortedTransactions;
+   let buyData,
+      sellData,
+      allData: ICustomChartData | null = null;
+   let totalData: any;
    const totalBuy = getTransactionsTotalAmount(buy);
    const totalSell = getTransactionsTotalAmount(sell);
 
@@ -115,34 +135,5 @@ const GraphsPage1Section: React.FC<ICtxProps> = ({ ctx }) => {
       type: "bar",
    };
 
-   return (
-      <div className="flex flex-1 md:row-start-2 md:row-end-4 md:py-1">
-         <section className="flex flex-1 flex-col md:py-0 md:px-2 md:bg-main-grey4 rounded">
-            <div className="min-h-screen flex py-1 md:min-h-0 md:flex-1 md:p-0 rounded">
-               <div className="flex flex-1 flex-col gap-2 p-2 md:p-0 md:py-2 md:min-h-max md:h-full md:flex-row bg-main-grey4 rounded">
-                  <Container customStyle="flex flex-1 md:flex-auto md:w-1/3 bg-main-grey">
-                     <ChartModel chartData={totalData} />
-                  </Container>
-                  <hr className="hidden md:block w-[1px] h-full bg-main-grey" />
-                  <Container customStyle="flex flex-1 md:flex-auto md:w-2/3 bg-main-grey2">
-                     <ChartModel chartData={allData} />
-                  </Container>
-               </div>
-            </div>
-            <hr className="hidden md:block h-[1px] w-full border border-b-[1px] border-b-main-grey" />
-            <div className="min-h-screen flex flex-1 py-1 md:min-h-0 md:flex-1 md:p-0 rounded">
-               <div className="flex flex-1 flex-col gap-2 p-2 md:p-0 md:py-2 md:min-h-max md:h-full md:flex-row bg-main-grey4 rounded">
-                  <Container customStyle="flex flex-1 bg-main-grey2">
-                     <ChartModel chartData={buyData} />
-                  </Container>
-                  <hr className="hidden md:block w-[1px] h-full bg-main-grey" />
-                  <Container customStyle="flex flex-1 bg-main-grey3">
-                     <ChartModel chartData={sellData} />
-                  </Container>
-               </div>
-            </div>
-         </section>
-      </div>
-   );
+   return { totalData, buyData, sellData, allData };
 };
-export default GraphsPage1Section;

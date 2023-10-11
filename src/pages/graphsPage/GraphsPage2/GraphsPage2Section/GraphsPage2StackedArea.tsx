@@ -18,7 +18,7 @@ const GraphsPage2StackedArea: React.FC<ICtxProps> = ({ ctx }) => {
       return <></>;
    }
    const { byDates } = sortedTransactions;
-   let windowStyle = {};
+   const windowStyle = {};
    // TODO
    const updatedOptions = getTransactionsStackedAreaOptions(byDates);
    return <ChartModel customOption={updatedOptions} style={windowStyle} />;
@@ -36,7 +36,7 @@ const getTransactionsStackedAreaOptions = (array: TransactionType[]) => {
          .map((arr) => arr.filter((a) => a.symbol === sym))
          .flat()
          .map((c) => c.amount);
-      let tempAmount = [...symAmounts];
+      const tempAmount = [...symAmounts];
       const reduced = symAmounts.reduce((prev, curr, ind) => {
          if (ind === 0) {
             return prev + curr;
