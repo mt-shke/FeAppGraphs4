@@ -11,7 +11,6 @@ import { ICtxProps } from "../../GraphsPage1/GraphsPage1Section";
 
 // Component and Data manipulation for the
 // CalendarTwoOption
-
 const GraphsPage2CalendarTwo: React.FC<ICtxProps> = ({ ctx }) => {
    const sortedTransactions = getTransactions(ctx);
    if (!ctx.account || !sortedTransactions) {

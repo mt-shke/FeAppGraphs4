@@ -25,7 +25,6 @@ const GraphsPage2DatePunch: React.FC<ICtxProps> = ({ ctx }) => {
    const { byDates } = sortedTransactions;
 
    const datePunchData = getDatePunchData(byDates);
-
    const punchSeriesData = [
       {
          name: "Punch Card",
@@ -40,7 +39,6 @@ const GraphsPage2DatePunch: React.FC<ICtxProps> = ({ ctx }) => {
          },
       },
    ];
-
    const updatedOption = {
       ...punchOption,
       series: punchSeriesData,

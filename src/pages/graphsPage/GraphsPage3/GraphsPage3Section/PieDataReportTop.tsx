@@ -29,7 +29,7 @@ const PieDataReportTop: React.FC<IUpdatedOptions> = ({ transactions }) => {
 
    return (
       <article className="p-2">
-         <ul>
+         <ul className="flex flex-col gap-2">
             <li>
                <h2 className="font-bold">
                   {totalTransactions} {`transactions`}
@@ -39,20 +39,20 @@ const PieDataReportTop: React.FC<IUpdatedOptions> = ({ transactions }) => {
                {`Total amount: `}${totalAmount}
             </li>
             <li>
-               {`First transaction: `}
+               {`Date of the first transaction: `}
                {firstTransactionDate}
             </li>
             <li>
-               {`Last transaction: `}
+               {`Date of the last transaction: `}
                {lastTransactionDate}
             </li>
             <li>
-               {`Lowest transaction: `}
-               {lowest}
+               {`Lowest transaction amount: `}${lowest}
+               {` for the ${firstTransaction.symbol} company`}
             </li>
             <li>
-               {`Highest transaction: `}
-               {highest}
+               {`Highest transaction amount: `}${highest}
+               {` for the ${lastTransaction.symbol} company`}
             </li>
          </ul>
       </article>

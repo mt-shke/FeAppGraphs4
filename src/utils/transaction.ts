@@ -3,15 +3,13 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 
 import { fixStringNumber } from ".";
-import { TransactionType, companies } from "../models/ts/types";
+import {
+   AllTransactionsType,
+   TransactionType,
+   companies,
+} from "../models/ts/types";
 import { ICustomerState } from "../state/CustomerContext";
 import { dateToEnFormat, dateToUnix } from "./dates";
-
-export type AllTransactionsType = {
-   buy: TransactionType[];
-   sell: TransactionType[];
-   byDates: TransactionType[];
-};
 
 // Return sorted transactions
 export const sortTransactions = (

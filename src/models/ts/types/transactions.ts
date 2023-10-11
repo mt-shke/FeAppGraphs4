@@ -57,3 +57,9 @@ export const companies = [
    "bb",
    "aapl",
 ];
+
+export type AllTransactionsType = {
+   buy: TransactionType[];
+   sell: TransactionType[];
+   byDates: TransactionType[];
+};
