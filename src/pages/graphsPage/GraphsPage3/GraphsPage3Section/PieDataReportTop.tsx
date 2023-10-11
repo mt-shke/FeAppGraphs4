@@ -1,16 +1,29 @@
 import { IUpdatedOptions } from ".";
+import { TransactionType } from "../../../../models/ts/types";
 
-const PieDataReportTop: React.FC<IUpdatedOptions> = ({ updatedOptions }) => {
-   const updatedData = updatedOptions.series[0].data;
-   const first = updatedData[0];
+export interface ITransactionsProps {
+   transactions: TransactionType[];
+}
+
+const PieDataReportTop: React.FC<IUpdatedOptions> = ({ transactions }) => {
+   console.log(transactions);
+
+   const totalTransactions = transactions.length;
+   const amounts = transactions.map((item) => item.amount);
+   const totalAmount = amounts.reduce((prev, curr) => prev + curr, 0);
+
+   console.log("amounts :", amounts);
 
    return (
       <article>
-         {updatedData.map((item, index) => (
-            <li key={item.name + index}>
-               {item.name} ${item.value}
+         <ul>
+            <li>
+               {totalTransactions} {`transactions`}
             </li>
-         ))}
+            <li>
+               {`Total amount: `}${totalAmount}
+            </li>
+         </ul>
       </article>
    );
 };

@@ -13,6 +13,7 @@ export const usePieOption = (
    const transactionsArray = getSingleCodeTransactions(ctx, transactionCode);
 
    const transactions = getTransactionCompaniesAmountData(transactionsArray);
+
    const updatedOptions = useMemo(() => {
       if (transactions.length > 0) {
          const pieUpdated = transactions.map((com: any) => ({

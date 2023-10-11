@@ -29,7 +29,7 @@ const AsideFooter: React.FC<ICustomerProps> = ({ ctx }) => {
    return (
       <div className="relative h-1/3 grid place-items-center text-sm">
          {ctx.account ? (
-            <nav className="absolute top-2 right-2 animate-fade">
+            <nav className="absolute top-2 animate-fade">
                <NavGraph />
             </nav>
          ) : (
