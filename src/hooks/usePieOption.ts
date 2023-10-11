@@ -10,13 +10,10 @@ export const usePieOption = (
    ctx: ICustomerState,
    transactionCode: "buy" | "sell"
 ) => {
-   console.log("trancode in usePieOption :", transactionCode);
    const transactionsArray = getSingleCodeTransactions(ctx, transactionCode);
+
    const transactions = getTransactionCompaniesAmountData(transactionsArray);
    const updatedOptions = useMemo(() => {
-      if (!transactionsArray) {
-         return pieOption;
-      }
       if (transactions.length > 0) {
          const pieUpdated = transactions.map((com: any) => ({
             value: com.totalAmount,

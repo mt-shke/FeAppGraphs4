@@ -57,20 +57,22 @@ export const getSingleCodeTransactions = (
    ctx: ICustomerState,
    transactionCode: "buy" | "sell"
 ): TransactionType[] => {
+   let result = [];
    if (ctx.account && ctx.transactions) {
       const firstBucketTransactions = getAccountBucketTransactions(ctx);
-      const result = sortTransactions(firstBucketTransactions);
-      const filtered = result.filter(
+      const sorted = sortTransactions(firstBucketTransactions);
+      const filtered = sorted.filter(
          (trans) => trans.transaction_code === transactionCode
       );
       if (filtered.length < 1) {
-         return [];
+         return result;
       }
-      return filtered;
+      result = [...filtered];
    }
+   return result;
 };
 
-// // // // // // // // // // // // // //
+// // // // // // // // // // // // //
 // ALL TRANSACTION DATA FUNCTIONS //
 export const getTransactionsCode = (transactions: TransactionType[]) =>
    transactions.map((trans) => trans.transaction_code)[0]?.toString() ?? "";
@@ -139,12 +141,13 @@ function generateDataObject(
    return finalDataObject;
 }
 
-// Exemple d'utilisation avec des données de dates aléatoires
-// const finalData = generateDataObject(allYears, transactions);
 export const getTransactionCompaniesAmountData = (
    transactions: TransactionType[]
 ) => {
    let expData = [];
+   if (transactions.length < 1) {
+      return [];
+   }
    companies.forEach((sym) => {
       const filtered = transactions.filter((trans) => trans.symbol === sym);
       const totalAmount = filtered.reduce(

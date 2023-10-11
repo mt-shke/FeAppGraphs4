@@ -37,7 +37,7 @@
 export const pieOption = {
    title: {
       // TODO
-      text: "Buy analyse",
+      text: "Buy transactions",
       // subtext: "A contemplative analyse of all the bought products",
       left: "center",
    },
@@ -63,4 +63,33 @@ export const pieOption = {
          },
       },
    ],
+};
+
+export type pieOptionType = {
+   title: {
+      text: string;
+      subtext?: string;
+      left: string;
+   };
+   tooltip: {
+      trigger: string;
+   };
+   legend: {
+      orient: string;
+      left: string;
+   };
+   series: {
+      name: string;
+      type: string;
+      radius: string;
+      data: { value: number; name: string }[];
+      emphasis?: {
+         itemStyle: {
+            shadowBlur: number;
+            shadowOffsetX: number;
+            shadowOffsetY?: number;
+            shadowColor: string;
+         };
+      };
+   }[];
 };
