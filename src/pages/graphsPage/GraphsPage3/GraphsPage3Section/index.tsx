@@ -25,7 +25,7 @@ const GraphsPage3Section: React.FC<ICtxProps> = ({ ctx }) => {
       pie = <Pie updatedOptions={updatedOptions} />;
    }
 
-   if (sortedTransactions) {
+   if (sortedTransactions.length > 0) {
       reportTop = <PieDataReportTop transactions={sortedTransactions} />;
    }
 
