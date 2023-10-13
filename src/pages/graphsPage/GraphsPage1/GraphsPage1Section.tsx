@@ -56,6 +56,7 @@ const GraphsPage1Section: React.FC<ICtxProps> = ({ ctx }) => {
          const foundTransactions = responses.map(
             (elem) => elem.data.transactions
          );
+         console.log("fetchedTransactions :", foundTransactions);
 
          return foundTransactions;
       } catch (error) {
