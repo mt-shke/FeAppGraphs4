@@ -10,7 +10,7 @@ export interface IDataCardProps extends ICtxProps {
    transactionCode: "buy" | "sell";
 }
 
-const DataCard: React.FC<props> = ({ ctx, transactionCode }) => {
+const DataCard: React.FC<IDataCardProps> = ({ ctx, transactionCode }) => {
    const customerName = ctx.customer?.name;
 
    if (!transactionCode) {

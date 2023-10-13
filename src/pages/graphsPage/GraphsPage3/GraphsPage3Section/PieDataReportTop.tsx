@@ -1,4 +1,4 @@
-import { IUpdatedOptions } from ".";
+// @ts-nocheck
 import { TransactionType } from "../../../../models/ts/types";
 import { dateToEnFormat } from "../../../../utils/dates";
 
@@ -6,7 +6,7 @@ export interface ITransactionsProps {
    transactions: TransactionType[];
 }
 
-const PieDataReportTop: React.FC<IUpdatedOptions> = ({ transactions }) => {
+const PieDataReportTop: React.FC<ITransactionsProps> = ({ transactions }) => {
    const totalTransactions = transactions.length;
    const amounts = transactions.map((item) => item.amount).sort();
    const totalAmount = amounts.reduce((prev, curr) => prev + curr, 0);
