@@ -8,6 +8,7 @@ export default {
       animation: {
          spinning: " spinning 1s linear infinite",
          wiggle: "wiggle 1s ease-in-out infinite",
+         spin: "spinning 1s linear infinite",
          fade: "fadeIn .3s ease-in",
          fade5: "fadeIn .3s ease-out",
          move: "move 2.5s ease-out",

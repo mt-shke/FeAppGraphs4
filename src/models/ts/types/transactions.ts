@@ -1,12 +1,3 @@
-export type TransactionType = {
-   date: string;
-   amount: number;
-   price: string;
-   total: string;
-   transaction_code: "buy" | "sell";
-   symbol: TransactionSymbolType;
-};
-
 export type TransactionsBucketType = {
    _id: string;
    account_id: number;
@@ -17,7 +8,16 @@ export type TransactionsBucketType = {
    // transactions: Map<string, TransactionType>;
 };
 
-type TransactionSymbolType =
+export type TransactionType = {
+   date: string;
+   amount: number;
+   price: string;
+   total: string;
+   transaction_code: "buy" | "sell";
+   symbol: TransactionSymbolType;
+};
+
+export type TransactionSymbolType =
    | "adbe"
    | "team"
    | "msft"

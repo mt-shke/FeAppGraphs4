@@ -1,15 +1,3 @@
-export type TierDetailsType = {
-   tier: string;
-   id: string;
-   _id: string;
-   active: boolean;
-   benefits: string[]; // Le type précis de `benefits` dépendrait des données qui y sont stockées
-};
-
-export type TierAndDetailsType = {
-   [key: string]: TierDetailsType;
-};
-
 export type CustomerType = {
    _id: string;
    username: string;
@@ -20,6 +8,18 @@ export type CustomerType = {
    active?: boolean;
    accounts: number[];
    tier_and_details: TierDetailsType | {};
+};
+
+export type TierDetailsType = {
+   tier: string;
+   id: string;
+   _id: string;
+   active: boolean;
+   benefits: string[];
+};
+
+export type TierAndDetailsType = {
+   [key: string]: TierDetailsType;
 };
 
 export interface ICustomerProps {

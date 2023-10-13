@@ -9,7 +9,8 @@ import {
 import ChartModel from "../../../components/echarts/ChartModel";
 import { ICustomChartData, chartColors } from "../../../utils/echarts";
 import { AllTransactionsType } from "../../../models/ts/types";
-import React from "react";
+import { authAxios } from "../../../api";
+import { useEffect } from "react";
 
 export interface ICtxProps {
    ctx: ICustomerState;
@@ -28,6 +29,40 @@ const GraphsPage1Section: React.FC<ICtxProps> = ({ ctx }) => {
       chartBuy = <ChartModel chartData={expectedSectionData.buyData} />;
       chartSell = <ChartModel chartData={expectedSectionData.sellData} />;
    }
+
+   useEffect(() => {
+      getAccountTransactions(ctx);
+   }, [ctx.account]);
+
+   const getAccountTransactions = async (ctx: ICustomerState) => {
+      try {
+         const customerAccounts = ctx.customer?.accounts;
+         if (!customerAccounts) {
+            return [];
+         }
+         // Single request
+         // const response = await authAxios.get(
+         //    "/transactions/" + customerAccounts[0]
+         // );
+
+         const promises = customerAccounts.map((elem) =>
+            authAxios.get("/transactions/" + elem)
+         );
+         const responses = await Promise.all(promises);
+         if (!responses) {
+            throw new Error("No Resp");
+         }
+         // Destruct responses to final transactions array
+         const foundTransactions = responses.map(
+            (elem) => elem.data.transactions
+         );
+
+         return foundTransactions;
+      } catch (error) {
+         console.log("Error :", error);
+      }
+   };
+
    return (
       <div className="flex flex-1 md:row-start-2 md:row-end-4 md:py-1">
          <section className="flex flex-1 flex-col md:py-0 md:px-2 md:bg-main-grey4 rounded">

@@ -21,3 +21,35 @@ export const useQueryPathApi = (pathname: string) => {
 export const useQueryAccounts = () => useQueryPathApi("accounts");
 export const useQueryCustomers = () => useQueryPathApi("customers");
 export const useQueryTransactions = () => useQueryPathApi("transactions");
+
+export const useLocalStorageData = () => {
+   const localData = window.localStorage.getItem("data");
+   if (localData) {
+      const parsedData = JSON.parse(localData);
+      return parsedData;
+   }
+   return null;
+};
+
+export const useQueryData = () => {
+   const accounts = useQueryPathApi("accounts");
+   const customers = useQueryPathApi("customers");
+   const transactions = useQueryPathApi("transactions");
+   if (accounts.data && customers.data && transactions.data) {
+      const localData = window.localStorage.getItem("data");
+      if (!localData) {
+         const data = {
+            customers: customers.data,
+            accounts: accounts.data,
+            transactions: transactions.data,
+         };
+         window.localStorage.setItem("data", JSON.stringify(data));
+      }
+   }
+
+   if (!customers) {
+      return null;
+   }
+
+   return customers.data;
+};

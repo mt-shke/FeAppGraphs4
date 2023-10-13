@@ -1,27 +1,35 @@
 import { useContext } from "react";
 import { ICustomerProps } from "./AsideMain";
 import { CustomerContext } from "../../../state/CustomerContext";
-// import { useQueryPathApi } from "../../../hooks";
+import { useQueryData, useQueryPathApi } from "../../../hooks";
 import { getRandomNum } from "../../../utils";
-import { useLocalData } from "../../../hooks/useLocalData";
 import NavGraph from "./NavGraphs";
+import { useLocalData } from "../../../hooks/useLocalData";
 
 const AsideFooter: React.FC<ICustomerProps> = ({ ctx }) => {
    const context = useContext(CustomerContext);
-   // const { data } = useQueryPathApi("customers");
-   const { customers } = useLocalData();
+   // const fetchedCustomers = useQueryData();
+   const { customers: jsonCustomers } = useLocalData();
 
    const setRandomCustomer = () => {
-      // if (data) {
-      //    const length = data.customers.length - 1;
-      //    const randomNum = getRandomNum(length);
-      //    const randomCustomer = data.customers[randomNum];
+      // if (fetchedCustomers) {
+      //    const length = fetchedCustomers.length - 1;
+      //    // const randomNum = getRandomNum(length);
+      //    const randomNum = 1;
+      //    const randomCustomer = fetchedCustomers[randomNum];
+
+      // const fetchCustomerAccounts = async () => {
+      //    const customerTransaction = await Promise.all(customerAccounts.map(acc => fetch(acc)))
+      // dispatch transaction
+      // }
+
       //    context.dispatch({ type: "UPDATE_CUSTOMER", payload: randomCustomer });
       // }
-      // if (!data) {
-      const length = customers.length - 1;
+      // if (!fetchedCustomers) {
+      const length = jsonCustomers.length - 1;
       const randomNum = getRandomNum(length);
-      const randomCustomer = customers[randomNum];
+      const randomCustomer = jsonCustomers[randomNum];
+
       context.dispatch({ type: "UPDATE_CUSTOMER", payload: randomCustomer });
       // }
    };

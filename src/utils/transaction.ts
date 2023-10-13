@@ -13,7 +13,7 @@ import { dateToEnFormat, dateToUnix } from "./dates";
 
 // Return sorted transactions
 export const sortTransactions = (
-   transactions: Record<string, TransactionType>
+   transactions: TransactionType[]
 ): TransactionType[] => {
    const transactionsArray = Object.values(transactions);
    if (transactionsArray.length <= 0) {
@@ -89,10 +89,10 @@ export const getTransactionsBySym = (
    sym: string
 ) => transactions.filter((trans) => trans.symbol === sym);
 
-function generateDataObject(
+export const generateDataObject = (
    allYears: string[],
    transactions: TransactionType[]
-) {
+) => {
    const dates = getTransactionsDate(transactions).map((date) =>
       date.toString().slice(0, 4)
    );
@@ -137,7 +137,7 @@ function generateDataObject(
    });
 
    return finalDataObject;
-}
+};
 
 export const getTransactionCompaniesAmountData = (
    transactions: TransactionType[]
@@ -200,69 +200,3 @@ export const getTransactionsCompaniesYearsData = (
 
    return finalObj;
 };
-
-// export const getTransactionsCompaniesYearsData = (array: TransactionType[]) => {
-//    let expectedCompaniesData: any = [];
-//    companies.forEach((sym) => {
-//       const filtered = array.filter((trans) => trans.symbol === sym);
-//       const totalArray = filtered.reduce((prev, curr) => prev + curr.amount, 0);
-//       const comData = {
-//          sym: sym,
-//          transactions: filtered,
-//          totalAmount: totalArray,
-//       };
-//       if (comData.totalAmount > 0) {
-//          expectedCompaniesData.push(comData);
-//       }
-//    });
-
-//    const sym = expectedCompaniesData.map((c) => c.sym);
-//    const totalAmount = expectedCompaniesData.map((c) => c.totalAmount);
-//    const transactions = expectedCompaniesData.map((c) => c.transactions);
-//    const allTransactions = transactions.flatMap((c) => c);
-
-//    const compTransByDate = getTransactionsDate(allTransactions);
-
-//    const allYears = [
-//       ...new Set(compTransByDate.map((year) => year.slice(0, 4))),
-//    ].sort((a, b) => Number(a) - Number(b));
-
-//    const finalObj = generateDataObject(allYears, allTransactions);
-
-//    let tempData = finalObj;
-//    // const uniqueSym = Object.values(finalObj).flatMap((arr) => arr);
-
-//    Object.entries(finalObj).forEach(([key, val]) => {
-//       // const valSym = val.map((v) => v.symbol);
-
-//       const yearData = sym.map((sy) => {
-//          const filtered = tempData[key].filter((arr) => arr.symbol === sy);
-//          if (filtered.length <= 0) {
-//             return [
-//                {
-//                   symbol: sy,
-//                   amount: 0,
-//                },
-//             ];
-//          } else return filtered;
-//       });
-//       tempData[key] = yearData.flatMap((c) => c);
-//    });
-
-//    // TODO Refac
-//    Object.entries(finalObj).forEach(([key, val], index) => {
-//       // const tempData[key] = val
-//       // const [temKey, temVal] = Object.entries(tempData);
-//       const yearData = val.map((v, i) => {
-//          const prev =
-//             index === 0
-//                ? 0
-//                : (Object.entries(finalObj)[index - 1][1].filter(
-//                     (arr) => arr.symbol === v.symbol
-//                  ).const = () => {
-//                     return { ...v, amount: v.amount + prev };
-//                  });
-//       });
-//    });
-//    return finalObj;
-// };

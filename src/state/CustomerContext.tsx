@@ -40,7 +40,6 @@ const reducer = (state: typeof initialState, action: CustomerActionType) => {
          const { transactions } = useLocalData();
          const sortedAccounts =
             action.payload?.accounts.sort((a, b) => a - b) || [];
-
          let allTransactions: TransactionsBucketType[] | [] = [];
 
          sortedAccounts.forEach((account, accountIndex) => {
