@@ -43,8 +43,7 @@ const GraphsPage1Section: React.FC<ICtxProps> = ({ ctx }) => {
          // Single request
          // const response = await authAxios.get(
          //    "/transactions/" + customerAccounts[0]
-         // );
-
+         // )
          const promises = customerAccounts.map((elem) =>
             authAxios.get("/transactions/" + elem)
          );
