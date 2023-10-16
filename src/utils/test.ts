@@ -1,5 +1,5 @@
 describe("add", () => {
-   it("should generate the correct data object", () => {
+   it("should compare the sum of expectedResult to result", () => {
       const expectedResult = 2 + 2;
 
       const result = 4;

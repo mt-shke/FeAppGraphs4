@@ -2,9 +2,20 @@ import { AllTransactionsType } from "../../../../models/ts/types";
 
 interface IGraphsData {
    sortedTransactions: AllTransactionsType;
+   report: string;
 }
 
-const DataReport: React.FC<IGraphsData> = ({ sortedTransactions }) => {
+const DataReport: React.FC<IGraphsData> = ({ sortedTransactions, report }) => {
+   if (report) {
+      console.log(report);
+
+      return (
+         <article className="flex flex-col gap-2 p-2">
+            <ul></ul>
+         </article>
+      );
+   }
+
    return (
       <article className="flex flex-col gap-2 p-2">
          <p>

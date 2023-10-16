@@ -1,4 +1,5 @@
 import Container from "../../../../components/ui/container/Container";
+import useOpenAi from "../../../../hooks/useOpenAi";
 import { getTransactions } from "../../../../utils/transaction";
 import { ICtxProps } from "./../GraphsPage1Section";
 import DataCard from "./DataCard";
@@ -7,6 +8,10 @@ import DataReport from "./DataReport";
 const GraphsPage1Header: React.FC<ICtxProps> = ({ ctx }) => {
    const sortedTransactions = getTransactions(ctx);
 
+   const aiData = useOpenAi(ctx);
+
+   console.log("aiData :", aiData);
+
    let dataLeft,
       dataCenter,
       dataReport = <></>;
@@ -14,7 +19,12 @@ const GraphsPage1Header: React.FC<ICtxProps> = ({ ctx }) => {
    if (sortedTransactions) {
       dataLeft = <DataCard ctx={ctx} transactionCode="buy" />;
       dataCenter = <DataCard ctx={ctx} transactionCode="sell" />;
-      dataReport = <DataReport sortedTransactions={sortedTransactions} />;
+   }
+
+   if (aiData) {
+      dataReport = (
+         <DataReport sortedTransactions={sortedTransactions} report={aiData} />
+      );
    }
 
    return (
