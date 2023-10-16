@@ -116,13 +116,8 @@ const useOpenAi = (ctxData: ICustomerState) => {
          setData(result);
       } catch (error) {
          // Consider adjusting the error handling logic for your use case
-         if (error.response) {
-            console.error(error.response.status, error.response.data);
-            setData(null);
-         } else {
-            console.error(`Error with OpenAI API request: ${error.message}`);
-            setData(null);
-         }
+         console.log("Error :", error);
+         setData(null);
       }
    };
 
